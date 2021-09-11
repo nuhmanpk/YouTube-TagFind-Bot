@@ -2,7 +2,7 @@
 A Telegram Bot to return Youtube Video Tags Using YoutubeTags API
 
 
-Credits 
-[YoutubeTags](https://pypi.org/project/YoutubeTags)
-[Check YoutubeTags](https://github.com/bughunter0/Youtubetags)
+# Credits 
+[YoutubeTags](https://pypi.org/project/YoutubeTags)<br>
+[Check YoutubeTags](https://github.com/bughunter0/Youtubetags)<br>
 [Pyrogram](https://docs.pyrogram.org/)
