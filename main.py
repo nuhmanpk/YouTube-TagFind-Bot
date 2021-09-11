@@ -1,5 +1,5 @@
 # © BugHunterCodeLabs ™
-# © bughunter0
+# © bughunter0 | Nuhman Pk
 # 2021
 # Copyright - https://en.m.wikipedia.org/wiki/Fair_use
 
@@ -19,23 +19,11 @@ bughunter0 = Client(
 )
 
 
-START_STRING_PRIVATE = """ Hi {}, I'm Youtube Video Tag Extractor,
- Send me a Youtube video Link to Get started
-"""
-
-ABOUT = """
-● **BOT:** `YouTube Tag Extractor` 
-● **AUTHOR :** [bughunter0](https://t.me/bughunter0) 
-● **SERVER :** `Heroku` 
-● **LIBRARY :** `Pyrogram` 
-● **LANGUAGE :** `Python 3.9` 
-● **SOURCE :** [BugHunterBots](https://t.me/BugHunterBots/93) 
-"""
-
 @bughunter0.on_message(filters.command(["start"]))
 async def start(bot, message):
    await message.reply_text("Join @BugHunterBots") # Edit start text here
    
+
 @bughunter0.on_message(filters.regex("https") | filters.regex("http") & filters.private)
 async def tag(bot, message):
     link = str(message.text)
