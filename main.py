@@ -29,6 +29,6 @@ async def tag(bot, message):
     link = str(message.text)
     txt = await message.reply_text("Getting all Tags...")
     tags = videotags(link) # https://github.com/bughunter0/YoutubeTags
-    await txt.edit(f"These are the Tags that I Found \n\n\n{tags} \n @BugHunterBots")
+    await txt.edit(f"These are the Tags that I Found \n\n`{tags}` \n\n\n @BugHunterBots")
 
 bughunter0.run()
