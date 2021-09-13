@@ -6,7 +6,7 @@
 import pyrogram
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from pyrogram.types import User, Message
+from pyrogram.types import User, Message, InlineQuery, InlineQueryResultArticle, InputTextMessageContent, InlineKeyboardMarkup, InlineKeyboardButton
 import YoutubeTags # https://pypi.org/project/youtubetags
 from YoutubeTags import videotags
 import os
@@ -33,13 +33,64 @@ async def start(bot, message):
    await message.reply_text(text = "Join @BugHunterBots ",reply_markup=SEARCH_BUTTON) # Edit start text here
    
 # Is there a better way ?? Add a pull
-YOUTUBE = filters.regex("https://www.youtube.com") | filters.regex("http://www.youtube.com") | filters.regex("https://youtu.be/") | filters.regex("https://www.youtu.be/") | filters.regex("http://www.youtu.be/")
+YOUTUBE = "https://www.youtube.com" | "http://www.youtube.com" | "https://youtu.be/" | "https://www.youtu.be/" | "http://www.youtu.be/"
 
-@bughunter0.on_message(YOUTUBE & filters.private)
+@bughunter0.on_message(filters.regex(YOUTUBE) & filters.private)
 async def tag(bot, message):
     link = str(message.text)
     txt = await message.reply_text("Getting all Tags...")
     tags = videotags(link) # https://github.com/bughunter0/YoutubeTags
     await txt.edit(f"**These are the Tags that I Found** \n\n`{tags}` \n\n\n @BugHunterBots")
     await message.reply(text="Join @BugHunterBots" , reply_markup=SEARCH_BUTTON)
+
+"""
+To enable Inline Search, make sure that You Turned on Inline Mode In Your Bot settings
+
+"""
+@bughunter0.on_inline_query()
+async def search(client: Client, query: InlineQuery):
+    answers = []
+    search_query = query.query.lower().strip().rstrip()
+
+    if search_query == "":
+        await client.answer_inline_query(
+            query.id,
+            results=answers,
+            switch_pm_text="Type Video name ©BugHunterBots",
+            switch_pm_parameter="help",
+            cache_time=0
+        )
+    else:
+        videosSearch = VideosSearch(search_query, limit=50)
+
+        for v in videosSearch.result()["result"]:
+            answers.append(
+                InlineQueryResultArticle(
+                    title=v["title"],
+                    description=" {} .".format(
+                       v["viewCount"]["short"]
+                    ),
+                    input_message_content=InputTextMessageContent(
+                        "https://www.youtube.com/watch?v={}".format(
+                            v["id"]
+                        )
+                    ),
+                    thumb_url=v["thumbnails"][0]["url"]
+                )
+            )
+
+        try:
+            await query.answer(
+                results=answers,
+                cache_time=0
+            )
+        except errors.QueryIdInvalid:
+            await query.answer(
+                results=answers,
+                cache_time=0,
+                switch_pm_text="Error: Search timed out",
+                switch_pm_parameter="",
+            )
+
+
 bughunter0.run()
