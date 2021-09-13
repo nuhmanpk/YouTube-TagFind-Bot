@@ -40,7 +40,7 @@ async def start(bot, message):
 async def tag(bot, message):
     link = str(message.text)
     tags = videotags(link) # https://github.com/bughunter0/YoutubeTags
-    txt = await message.reply_text(text=f"**These are the Tags that I Found** \n\n `{tags}` \n\n\n @BugHunterBots",reply_markup=SEARCH_BUTTON)
+    await message.reply_text(text=f"**These are the Tags that I Found** \n\n `{tags}` \n\n\n @BugHunterBots",reply_markup=SEARCH_BUTTON)
     
 # To enable Inline Search, make sure that You Turned on Inline Mode In Your Bot settings
 
