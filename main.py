@@ -33,9 +33,8 @@ async def start(bot, message):
    await message.reply_text(text = "Join @BugHunterBots ",reply_markup=SEARCH_BUTTON) # Edit start text here
    
 # Is there a better way ?? Add a pull
-YOUTUBE = "https://www.youtube.com" | "http://www.youtube.com" | "https://youtu.be/" | "https://www.youtu.be/" | "http://www.youtu.be/"
 
-@bughunter0.on_message(filters.regex(YOUTUBE) & filters.private)
+@bughunter0.on_message((filters.regex("https://www.youtube.com") | filters.regex("http://www.youtube.com") | filters.regex("https://youtu.be/") | filters.regex("https://www.youtu.be/") | filters.regex("http://www.youtu.be/")) & filters.private)
 async def tag(bot, message):
     link = str(message.text)
     txt = await message.reply_text("Getting all Tags...")
@@ -56,7 +55,7 @@ async def search(client: Client, query: InlineQuery):
         await client.answer_inline_query(
             query.id,
             results=answers,
-            switch_pm_text="Type Video name ©BugHunterBots",
+            switch_pm_text="Join ©BugHunterBots",
             switch_pm_parameter="help",
             cache_time=0
         )
