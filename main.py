@@ -3,13 +3,15 @@
 # 2021
 # Copyright - https://en.m.wikipedia.org/wiki/Fair_use
 
+import os
 import pyrogram
 from pyrogram import Client, filters
+from youtubesearchpython import VideosSearch
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.types import User, Message, InlineQuery, InlineQueryResultArticle, InputTextMessageContent, InlineKeyboardMarkup, InlineKeyboardButton
 import YoutubeTags # https://pypi.org/project/youtubetags
 from YoutubeTags import videotags
-import os
+
 
 SEARCH_BUTTON = InlineKeyboardMarkup(
         [[
