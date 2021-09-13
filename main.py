@@ -39,15 +39,12 @@ async def start(bot, message):
 @bughunter0.on_message((filters.regex("https://www.youtube.com") | filters.regex("http://www.youtube.com") | filters.regex("https://youtu.be/") | filters.regex("https://www.youtu.be/") | filters.regex("http://www.youtu.be/")) & filters.private)
 async def tag(bot, message):
     link = str(message.text)
-    txt = await message.reply_text("Getting all Tags...")
     tags = videotags(link) # https://github.com/bughunter0/YoutubeTags
-    await txt.edit(f"**These are the Tags that I Found** \n\n`{tags}` \n\n\n @BugHunterBots")
-    await message.reply(text="Join @BugHunterBots" , reply_markup=SEARCH_BUTTON)
+    txt = await message.reply_text(text=f"**These are the Tags that I Found** \n\n`{tags}` \n\n\n @BugHunterBots",reply_markup=SEARCH_BUTTON)
+    
+# To enable Inline Search, make sure that You Turned on Inline Mode In Your Bot settings
 
-"""
-To enable Inline Search, make sure that You Turned on Inline Mode In Your Bot settings
 
-"""
 @bughunter0.on_inline_query()
 async def search(client: Client, query: InlineQuery):
     answers = []
