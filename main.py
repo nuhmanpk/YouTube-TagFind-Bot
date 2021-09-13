@@ -34,13 +34,13 @@ bughunter0 = Client(
 async def start(bot, message):
    await message.reply_text(text = "Join @BugHunterBots ",reply_markup=SEARCH_BUTTON) # Edit start text here
    
-# Is there a better way ?? Add a pull
+# Is there a better way to do line 39?? Add a pull
 
 @bughunter0.on_message((filters.regex("https://www.youtube.com") | filters.regex("http://www.youtube.com") | filters.regex("https://youtu.be/") | filters.regex("https://www.youtu.be/") | filters.regex("http://www.youtu.be/")) & filters.private)
 async def tag(bot, message):
     link = str(message.text)
     tags = videotags(link) # https://github.com/bughunter0/YoutubeTags
-    await message.reply_text(text=f"**These are the Tags that I Found** \n\n ` {tags} ` \n\n\n @BugHunterBots",reply_markup=SEARCH_BUTTON)
+    await message.reply_text(text=f"**These are the Tags that I Found** \n\n ` {tags} ` \n\n\n @BugHunterBots \n \n @BugHunter0bot",reply_markup=SEARCH_BUTTON)
     
 # To enable Inline Search, make sure that You Turned on Inline Mode In Your Bot settings
 
