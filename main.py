@@ -40,11 +40,12 @@ async def start(bot, message):
 async def tag(bot, message):
     link = str(message.text)
     tags = videotags(link) # https://github.com/bughunter0/YoutubeTags
-    await message.reply_text(text=f"**These are the Tags that I Found** \n\n ` {tags} ` \n\n\n @BugHunterBots \n \n @BugHunter0bot",reply_markup=SEARCH_BUTTON)
-    
+    if tags=="":
+         await message.reply_text("No Tags Found")
+    else:
+         await message.reply_text(text=f"**These are the Tags that I Found** \n\n ` {tags} ` \n\n\n @BugHunterBots \n \n @BugHunter0bot",reply_markup=SEARCH_BUTTON)
+  
 # To enable Inline Search, make sure that You Turned on Inline Mode In Your Bot settings
-
-
 @bughunter0.on_inline_query()
 async def search(client: Client, query: InlineQuery):
     answers = []
@@ -89,6 +90,5 @@ async def search(client: Client, query: InlineQuery):
                 switch_pm_text="Error: Search timed out",
                 switch_pm_parameter="",
             )
-
 
 bughunter0.run()
